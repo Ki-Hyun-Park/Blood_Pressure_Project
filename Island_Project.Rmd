@@ -1,0 +1,221 @@
+---
+title: "Final Report on Blood Pressure|Exercise|Stimulants"
+author: "Groups 7 and 8"
+output: 
+  bookdown::pdf_book:
+    keep_tex: true
+    citation_package: natbib
+header-includes:
+- \usepackage{footnote}
+- \renewcommand{\thefootnote}{\arabic{footnote}}
+- \usepackage{indentfirst}
+classoption:
+ twocolumn
+bibliography: refs.bib
+ 
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+require("knitr")
+opts_knit$set(root.dir = getwd())
+```
+
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(error = TRUE)
+```
+
+
+```{r setup2, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+
+
+
+```{r}
+library("tidyverse")
+library("pwr")
+library("sjstats")
+library("phia")
+library("kableExtra")
+library("knitcitations")
+library("bookdown")
+
+
+#reading in data
+data_bp <- read.csv("sample_true.csv")
+data_bp <- data_bp[,6:12]
+data_bp <- data_bp[-c(49,50,51),]
+names(data_bp) <- c("B1", "B2", "A", "B", "BPS", "BPE", "BPD")
+
+#ordering data
+data_bp$B1 <- (rep(c(rep(-1,8), rep(0,8), rep(1,8)), 2))
+data_bp$B2 <- (c(rep(-1, 24), rep(1,24)))
+
+data_bp <- arrange(data_bp, B2, B1, A, B)
+data_bp <- data_bp[,c(3,4,1,2,5,6,7)]
+
+snapshot <- data_bp
+snapshot$A <- (rep(c(rep("5km run",4), rep("20min wait",4)), 6))
+snapshot$B <- (rep(c("Coca","Coca","Olive Oil","Olive Oil"), 12))
+
+#ANOVAs
+aov_bpd <- aov(BPD ~ A*B, data = data_bp)
+aov_bpd_blocked <- aov(BPD ~ A*B + B1 + B2, data = data_bp)
+
+#changing factor levels
+data_bp$A <- (rep(c(rep(-1,4), rep(1,4)), 6))
+data_bp$B <- (rep(c(-1,-1,1,1), 12))
+
+```
+
+
+
+# Introduction
+
+**Motivation:** At the start of this project, we decided to investigate a phenomenon within the islands that would have real-world significance; this led us to choose blood pressure as our response variable. With coronary disease being the number one cause of death worldwide, we were confident that this investigation had the potential to achieve the significance we desired.
+
+At this point, we needed to figure out how to address our topic. Rather than simply analyze blood pressure and create a picture of the overall population, we wanted to work towards a solution to the deadly condition of high blood pressure. With that in mind, we decided to develop different treatments that could be applied to individuals in order to assess what methods reduced blood pressure most of all. 
+    
+**Review and Plan:** Studying the literature gave us at least two places to start; exercise and diet. Blood pressure in athletes is typically much lower than in the average person. In fact, exercise of any kind over a prolonged period has been shown to reduce blood pressure (Dimeo et al, 2012). It’s one of the most common prescriptions given by doctors to patients facing high blood pressure; the other is a change in diet, usually involving reduction of fat intake, as fat can clog arteries and lead to higher blood pressure (Bazzano, 2013).
+    
+Given this, exercise and diet seemed like good factors to manipulate, but we also wanted to see if a strange effect outside of the literature might be observed. To that end, we incorporated coca leaves into our project. That changed our diet treatment factor into a “stimulant” treatment factor, combining coca leaves and olive oil as two levels of that factor. On top of our exercise and stimulant factors, we also recognized that blood pressure can be affected by age and gender. These seemed like nuisance factors that we might want to control for via blocking.
+
+Additionally, most studies conducted on this topic measure blood pressure over time. Because we had limited time and wanted to expand on existing studies, we decided to limit our experiment to a single bout of exercise and stimulant intake. That one instance would be the only time that we measured our subjects’ blood pressure, and we hoped it would give us an insightful snapshot into the subjects’ responses to our chosen factors.
+
+
+# Design
+
+**Factorial Model:** In order to determine the effect that the factors we chose actually had on blood pressure, we decided to use a full 2 X 2 factorial model with blocking. The procedural factors were exercise (with a five kilometer run being the high level, and a twenty minute wait being the low level) and stimulant (with chewing coca leaves for ten minutes being the high level, and ingesting 500 milligrams of olive oil tablets being the low level). Our blocks were age (blocked in three levels at 16 to 35 years old, 36 to 55 years old, and 56+ years old) and gender (blocked in two levels for males and females).
+
+**Procedure:** For every subject, prior to any application of the treatment factors, we began by taking the systolic blood pressure. This was recorded as the starting blood pressure. Then, the assigned stimulant treatment was administered. Afterward, the assigned exercise treatment was administered. Immediately at the end of the assigned exercise treatment, blood pressure was taken again, and recorded as the ending blood pressure. To get the blood pressure difference, the starting blood pressure was subtracted from this ending blood pressure. This was used as our response variable.
+
+We did not record diastolic blood pressure and instead used only systolic (which is the pressure in a person’s circulatory system at the moment of a heartbeat, and not between heartbeats, which is what diastolic measures) because according to the National Institute of Health, isolated high systolic blood pressure alone is associated with higher risk of kidney issues, liver issues, and circulatory issues, while isolated high diastolic blood pressure is not. We used the blood pressure difference in an attempt to further minimize the variance in our data due to noise beyond what our blocks might already be accomplishing. By controlling for the change in blood pressure of each individual, we hoped to take out the differences in their resting blood pressure. In this way, each individual becomes their own frame of reference that allows us to make more equitable comparisons across the whole group.
+
+**Sample Composition and Collection:** Sample size was determined based on two major constraints - our desired power level, and the time in which we had to conduct our tests. For the first, we settled on 0.8 as the desired power level, and knowing the four groups we were making with our 2 X 2 factorial design and setting our desired effect size to 0.5, that means we need about twelve subjects per group. Those twelve individuals created two replicates for each of the six blocking levels within those groups. At this point, our limited time came into play. It was possible for us to increase the replicates to three or four or five for each of those blocking levels. That would mean our effect size detection ability would increase. That would also mean, however, running seventy-two, ninety-six or one hundred twenty subjects in all, which would strain our resources as a group. Because of this, and because our response variable - the difference in blood pressure - was potentially resistant to the noise produced by nuisance factors we were blocking for, as well as variance generally, we decided to forego running enough test subjects to give the blocked groups enough detection power.
+
+In order to have a balanced design in the time allotted, we settled on just forty-eight participants (twelve subjects per group and four groups total). Each group of twelve that was receiving the same procedural factor combination would consist of an even mix of two people from every combination of the three age and two gender blocks. This eventually proved to be a limiting factor in our test and may have left an impact on our final results if the effect of nuisance factors was significant. 
+
+In order to collect our sample, we considered generalizability and true random selection to be imperative. Thus, we selected individuals at random from across all of the islands by first randomly selecting a city, then a household within that city, and then a person within that household, if that household were not empty. We repeated this process by generating sets of random numbers that represented the cities, households, and individuals that we were selecting. It eventually took approximately one hundred fifty sets of random numbers before we arrived at our requisite forty-eight individuals who both fit within our blocking levels and consented to participating in our study.
+
+``` {r echo=FALSE }
+knitr::kable(format = "latex", booktabs = TRUE, snapshot %>% head(5), caption = "This is just a small portion of the data as an example.") %>%
+  kable_styling()
+```
+    
+# Results
+
+To begin our analysis, we conducted two ANOVAs. The first attempted to predict the blood pressure difference that we observed based on the exercise and stimulant factors as well as their interaction.  
+
+$$\mathbf{Eq.1:}$$
+
+$$BPD_{ijk} = \mu + A_i + B_j + (A * B)_{ij} + \epsilon_{ij}$$
+
+The second was the same but introduced the two blocking factors of age and gender into the equation.
+
+$$\mathbf{Eq.2:}$$
+
+$$BPD_{ijk} = \mu + A_i + B_j + (A * B)_{ij} + B1_k + B2_l + \epsilon_{ijkl}$$
+
+*note: The "A" is a stand-in for the Exercise effect, "B" for the Stimulant effect, "B1" for the Age Blocking effect, and "B2" for Gender Blocking effect.*
+
+The interaction effect of the exercise and stimulant factors proved significant in both models (for model 1, *p* = 0.0393; for model 2, *p* = 0.048). Neither main effect reached the $\alpha$ = 0.05 level of significane in either model. Curiously, the block effects did not reach significance either. As the significance of the interaction effect was greater in the unblocked model and as the block effects were not significant, the unblocked model was the model that we used to continue analysis with.^[A complete printout of the ANOVA tables from R can be found in Appendix A.] 
+
+As we suspected, using the blood pressure difference as a response variable likely accounted for the majority of the effects of age and gender on blood pressure, meaning that the effects of those blocks were not significant.
+
+**Fit:** At this point, it is necessary to assess model fit. For this, we simply checked our residual plots and normality plots. In the residuals, we found no significant pattern, nor a widening of their spread as the predicted values increased. This confirmed our assumption of homoscedasticity. In the normality plots, most values hewed close to the predictive line. This confirmed our assumption of the data being close to normal.^[The plots assessing fit for both models can found in Appendix C.] 
+
+**Effect:** At this point, we wanted to calculate effect size using Cohen’s f. The results show that the largest effect size, as expected, came from the interaction effect. Using standard interpretation than any effect size between f = 0.25 and f = 0.4 is medium, we’ll note that this effect appears to be of middling strength. ^[The full printout of effect size is attached as Appendix D.]
+
+**Post-hoc:** To determine which means specifically differed, we conducted a pairwise Tukey test. These results demonstrated that no particular pair of means genuinely differed. Instead, some linear contrast of them reached significance with respect to the F distribution, but not the studentized distribution. As Tukey’s Honestly Significant Difference test does attempt to control for the alpha level, it is possible that it excluded results by erring on the side of being more conservative.^[Pairwise mean comparisons are included in Appendix B.]
+
+``` {r, fig.cap = 'This plot demonstrates the extreme crossover effect we noted earlier'}
+
+with(snapshot, {interaction.plot(A, B, BPD, main = "Blood Pressure: Exercise vs. Stimulant", xlab = "Exercise", trace.label = "Stimulant")})
+```
+
+
+**Interaction:** Getting back to the model. In order to understand the importance of the interaction, view fig. 1. We see that there is a very distinct cross over effect between the variables. This heavy interaction might be masking the main effects that the exercise or stimulant factor could have exhibited alone. 
+
+# Conclusion
+
+We set out to determine what effect a single session of exercise might have on blood pressure if it were combined with a stimulant factor. Our results indicated that the factors significantly interacted. That means that we noted a specific combination of factors - and not one or the other in particular - made the greatest impact on blood pressure. Referring again to fig. 1 above, we can tell that the combination that led to the greatest negative change in blood pressure difference combined the low level of factor B with the high level of factor B: a twenty minute wait for the exercise, and chewing coca leaves for the stimulant. On the chart, this shows the greatest effect. It is worth noting that as the difference between ending and starting blood pressure becomes more and more negative, overall blood pressure has been lowered by a greater amount. Because of that, we are seeking the minimum effect, not the maximum.
+
+Our results are partially unexpected. It does not mesh with the literature (notably, it goes against the results of Dimeo et al.) that we should find our ideal conditions include skipping exercise. However, there are a number of mitigating factors that require consideration in order to fully interpret our results. 
+
+Firstly, our significant interaction effect is likely masking the true values of our main effects. When interactions do this, it can lead to the implication that the main effects are less important, but it should be noted that those main effects might reach significance 
+
+Secondly, as we noted in our introduction, this study is examining exercise in a single session. Previous literature - such as the above - used periods of eight to twelve weeks or longer. In this way, our subjects may not have done a sufficient amount of exercise for it to impact their blood pressure. Or, exercise may have a different effect in smaller amounts than in larger amounts.
+
+Finally, a look at our other effects means shows that running and ingesting olive oil does have a similar blood pressure reducing effect. That treatment combination falls more in line with expectations to a certain extent. And taken together, these three factors help to confirm that our results are not in contradiction with previous research, but perhaps exist alongside them.
+
+In terms of application, this result can only be extended to very narrow situations. For example, if an individual is seeking to lower their blood pressure, they should consisder the fact that our result involved a particularly short term scenario. Chewing coca leaves without exercising lowered blood pressure over aproximately a thirty minute window. These are rather immediate effects, which means the method we discovered should be applied only to individuals who are interested in reducing blood pressure immediately. Longer term solutions will likely involve exercise and dietary habits over a longer period of time, and this distinction will be further addressed later in our limitations section.
+    
+**Limitations:** One large limitation of our study was sample size. If we were able to conduct a test using a larger sample, a number of our results might have shifted slightly. The power analysis that we did in the beginning indicates that we could have had a both a higher power and better effect size detection. It is also possible that the pairwise Tukey test might become significant for individual pairs of means once the sample size was large enough. Future research should be able to address this problem merely through replication.
+
+That research should also refine the method that we developed. That might include switching the treatment application (from stimulant then exercise to exercise then stimulant) in order to see if there is any effect that comes from that. Or it might involve changing the study into a more longitudinal form. This would combine the snapshot analysis of a single session of exercise with the existing research that typically studies subjects over longer periods. At that point, the efficacy of using a single session to predict future blood pressure would be analyzed. If that single session effect remains important, that could indicate that even a very brief test for an individual could help them determine how to best fight their high blood pressure.
+
+# References
+
+ - National Institute of Health. 2018. High Blood Pressure. from http://www.nimh.nih.gov/health/topics/eating-disorders/index.shtml. accessed 2019-09-14}
+ 
+ - Fernando Dimeo, Nikolaos Pagonas, Felix Seibert, Robert Arndt, Walter Zidek, and Timm H. Westhoff. 2012. Aerobic Exercise Reduces Blood Pressure in Resistant Hypertension. *American Heart Association* 60, (2012), 653-658.http://doi.org/10.1161/HYPERTENSIONAHA.112.197780
+ 
+ -  Lydia A. Bazzano, Torrance Green, Teresa N. Harrison, and Kristi Reynolds. 2013. Dietary Approaches to Prevent Hypertension. *Current Hypertension Reports* 15, 6 (2013), 694-702.  http://doi.org/10.1007s11906-013-0390-z
+
+
+\bibliography{refs.bib}
+
+\onecolumn
+
+#APPENDIX A: ANOVAs
+
+**Unblocked Model Output**
+``` {r echo=FALSE, out.width='0.98\\textwidth' }
+knitr::kable(format = "latex", booktabs = TRUE, cbind(summary(aov_bpd)[[1]][1:3], summary(aov_bpd)[[1]][4:5])) %>%
+  kable_styling()
+```
+
+**Blocked Model Output**
+
+``` {r echo=FALSE, out.width='0.98\\textwidth' }
+knitr::kable(format = "latex", booktabs = TRUE, cbind(summary(aov_bpd_blocked)[[1]][1:3], summary(aov_bpd_blocked)[[1]][4:5])) %>%
+  kable_styling()
+```
+
+# APPENDIX B: Pairwise Comparisons
+
+```{r }
+TukeyHSD(aov_bpd)
+```
+
+#APPENDIX C: Fit
+
+``` {r}
+par(mfrow = c(1,2))
+plot(fitted(aov_bpd), resid(aov_bpd), main = "Unblocked: Residual Plot", xlab= "Fitted", ylab = "Residuals")
+qqnorm(data_bp$BPD, main = "Unblocked: Normality Plot")
+qqline(data_bp$BPD)
+
+par(mfrow = c(1,2))
+plot(fitted(aov_bpd_blocked), resid(aov_bpd), main = "Blocked: Residual Plot", xlab= "Fitted", ylab = "Residuals")
+qqnorm(data_bp$BPD, main = "Blocked: Normality Plot")
+qqline(data_bp$BPD)
+```
+
+#APPENDIX D: Cohen's F
+
+```{r }
+cohens_f(aov_bpd)
+```
+
+#APPENDIX E: Example of Data
+
+```{r}
+
+head(data_bp)
+
+```
+
+

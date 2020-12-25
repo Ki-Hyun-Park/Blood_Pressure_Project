@@ -1,0 +1,52 @@
+ID,City,Household,Researcher,Names,Age,Gender,Exercise,Stimulant,Blood Pressure (Start),Blood Pressurer (End),Blood Pressure (Difference)
+6,Biruwa,252,Yoni Aboody,Sanna Solberg,16,F,None,Olive Oil,124,119,-5
+55,Shinobi,16,Jeremy Phan,Emma Clausen ,20,F,5km outdoor run,Olive Oil,124,122,-2
+57,Mahuti,1052,Ki Hyun Park,Ayaka Morris,21,F,5km outdoor run,Coca Leaves,126,124,-2
+45,Vardo,377,Ki Hyun Park,Dahl Blomgren,24,F,None,Coca Leaves,131,128,-3
+52,Hayarano,105,Ki Hyun Park,Halle Blomgren,26,F,5km outdoor run,Olive Oil,128,126,-2
+10,Nelson,102,Yoni Aboody,Niamh Jackson,30,F,5km outdoor run,Coca Leaves,130,128,-2
+60,Colmar,86,Riccardo Burragato,Lara  Lund,34,F,None,Coca Leaves,130,131,1
+42,Maeva,135,Ki Hyun Park,Manami Kimura,35,F,None,Olive Oil,130,133,3
+16,Akkeshi,490,Gabriel Marquez,Lilja Carlsen,37,F,None,Coca Leaves,139,134,-5
+33,Mahuti,1370,Riccardo Burragato,Lucy Connolly,38,F,None,Olive Oil,137,131,-6
+12,Kiyobico,329,Gabriel Marquez,Dr Tyra Eklund,40,F,5km outdoor run,Olive Oil,136,131,-5
+18,Kiyobico,316,Gabriel Marquez,Jeneve Ibsen,42,F,5km outdoor run,Olive Oil,141,138,-3
+9,Gordes,149,Gabriel Marquez,Yvonne Blomgren,44,F,5km outdoor run,Coca Leaves,133,140,7
+14,Akkeshi,498,Gabriel Marquez,Anna Carlsen,44,F,None,Coca Leaves,134,137,3
+8,Vardo,557,Yoni Aboody,Megan Brown ,48,F,None,Olive Oil,135,144,9
+5,Hofn,1053,Yoni Aboody,Elin Jensen,53,F,5km outdoor run,Coca Leaves,130,127,-3
+38,Nelson,316,Gabriel Marquez,Ellen Edwards,56,F,None,Coca Leaves,141,140,-1
+62,Arcadia,285,Gabriel Marquez,Mary Connolly,61,F,5km outdoor run,Coca Leaves,139,147,8
+4,Vardo,84,Yoni Aboody,Lucia Lund,71,F,5km outdoor run,Coca Leaves,150,147,-3
+40,Arcadia,247,Gabriel Marquez,Abby Connolly,73,F,5km outdoor run,Olive Oil,157,151,-6
+29,Nelson,181,Riccardo Burragato,Sophia Solberg,79,F,None,Olive Oil,163,164,1
+26,Helvig,511,Riccardo Burragato,Sonja Carlsen,82,F,None,Coca Leaves,167,167,0
+31,Valais,225,Riccardo Burragato,Sophie Brown,83,F,5km outdoor run,Olive Oil,163,168,5
+32,Valais,339,Riccardo Burragato,Elsa Erickson,84,F,None,Olive Oil,163,168,5
+56,Vardo,577,Yoni Aboody,Nico Blomgren ,16,M,5km outdoor run,Olive Oil,123,120,-3
+61,Helvig,768,Riccardo Burragato,David Solberg,16,M,5km outdoor run,Olive Oil,120,124,4
+17,Vaiku,103,Gabriel Marquez,Jeremy Eklund,17,M,5km outdoor run,Coca Leaves,118,116,-2
+53,Biruwa,124,Ki Hyun Park,Jack McCarthy,19,M,None,Coca Leaves,123,123,0
+58,Nidoma,62,Ki Hyun Park,Lamont Erickson,21,M,None,Olive Oil,122,122,0
+49,Shinobi,130,Ki Hyun Park,Tyr Jensen,23,M,5km outdoor run,Coca Leaves,130,126,-4
+59,Biruwa,148,Ki Hyun Park,David Ibsen,25,M,None,Coca Leaves,129,126,-3
+36,Vaiku,233,Jeremy Phan,Seymour Yamada,29,M,None,Olive Oil,123,132,9
+2,Bjurholm,345,Yoni Aboody,Soren Sorensen,37,M,None,Coca Leaves,114,108,-6
+7,Riroua,304,Yoni Aboody,Viggo EKlund,37,M,None,Olive Oil,122,124,2
+1,Vaiku,176,Yoni Aboody,Kieran Edwards,38,M,5km outdoor run,Coca Leaves,130,138,8
+24,Vardo,501,Riccardo Burragato,Andrew Collins,39,M,5km outdoor run,Olive Oil,128,132,4
+15,Gordes,107,Gabriel Marquez,Colin Wilson,45,M,None,Olive Oil,134,134,0
+20,Blunduos,733,Gabriel Marquez,Matthias Bager,46,M,None,Coca Leaves,118,122,4
+23,Vaiku,282,Gabriel Marquez,Yuta Kimura,49,M,5km outdoor run,Olive Oil,136,140,4
+21,Hofn,650,Gabriel Marquez,Kevin Connolly,51,M,5km outdoor run,Coca Leaves,119,124,5
+27,Helluland,295,Riccardo Burragato,Soren Carlsen,56,M,5km outdoor run,Coca Leaves,118,124,6
+13,Hayarano,630,Gabriel Marquez,Takumi Edwards,58,M,None,Coca Leaves,140,144,4
+3,Hayarano,110,Yoni Aboody,Mathew Collins,60,M,5km outdoor run,Coca Leaves,139,143,4
+19,Blunduos,51,Gabriel Marquez,Jonas Ibsen,63,M,None,Coca Leaves,149,144,-5
+25,Valais,204,Riccardo Burragato,Paul Solberg,73,M,5km outdoor run,Olive Oil,155,154,-1
+35,Kinsale,29,Jeremy Phan,James Sato,75,M,5km outdoor run,Coca Leaves,151,155,4
+34,Shinobi,43,Riccardo Burragato,David Solberg,94,M,None,Olive Oil,162,164,2
+22,Nelson,129,Gabriel Marquez,Jacob McCarthy,121,M,None,Olive Oil,150,152,2
+,,,,,,,,,,,
+,,,,,,,,,,,
+ ,,,,,,,,,,,

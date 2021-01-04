@@ -6,7 +6,7 @@
 
 - As a group of 7 people, we:
    <p>
-       - Conducted a 2x2 factorial model with blocking(age/gender) and analyzed the effects of two factors(exercise/diets) on blood pressure. <br/>
+   - Conducted a 2x2 factorial model with blocking(age/gender) and analyzed the effects of two factors(exercise/diets) on blood pressure. <br/>
 
    - Used the website called “The Islands”(website with virtual islands that have information on inhabitant’s diet, exercise routine, health, age, and gender)      and collected every data on 48 inhabitants. <br/>
 
